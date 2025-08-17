@@ -50,4 +50,18 @@ export class TasksService {
     this.tasks.push(newTask);
     return newTask;
   }
+
+  deleteTask(id: string) {
+    this.tasks = this.tasks.filter((task) => task.id !== id);
+  }
+
+  updateTask(id: string, status: TaskStatus) {
+    this.tasks = this.tasks.map((task) => {
+      if (task.id === id) {
+        task.status = status;
+      }
+
+      return task;
+    });
+  }
 }
