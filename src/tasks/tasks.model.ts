@@ -7,13 +7,8 @@ export interface Task {
 
 export type TaskList = Task[];
 
-export interface CreateTaskDto {
-  title: string;
-  description: string;
-}
-
 export enum TaskStatus {
-  OPEN = "OPEN",
-  IN_PROGRESS = "IN_PROGRESS",
-  DONE = "DONE",
+  OPEN = 'OPEN',
+  IN_PROGRESS = 'IN_PROGRESS',
+  DONE = 'DONE',
 }
