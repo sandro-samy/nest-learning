@@ -5,6 +5,7 @@ export class filterTasksDto {
   @IsOptional()
   search?: string;
 
+  @IsOptional()
   @IsEnum(TaskStatus)
   status?: TaskStatus;
 }
