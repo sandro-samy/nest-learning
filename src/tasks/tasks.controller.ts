@@ -9,8 +9,9 @@ import {
   Query,
 } from '@nestjs/common';
 import { TasksService } from './tasks.service';
-import { CreateTaskDto } from './dto/create-task-dto';
-import { filterTasksDto } from './dto/filter-tasks-dto';
+import { CreateTaskDto } from './dto/create-task.dto';
+import { filterTasksDto } from './dto/filter-task.dto';
+import { UpdateTaskStatusDto } from './dto/update-task-status.dto';
 
 @Controller('tasks')
 export class TasksController {
@@ -27,13 +28,7 @@ export class TasksController {
 
   @Get('/:id')
   getTaskById(@Param('id') id: string) {
-    const task = this.tasksService.getTaskById(id);
-
-    if (!task) {
-      throw new Error(`Task with id ${id} not found`);
-    }
-
-    return task;
+    return this.tasksService.getTaskById(id);
   }
 
   @Post('/')
@@ -49,7 +44,11 @@ export class TasksController {
   }
 
   @Patch('/:id/status')
-  updateTask(@Param('id') id: string) {
-    return this.tasksService.updateTask(id);
+  updateTask(
+    @Param('id') id: string,
+    @Body() updateTaskStatusDto: UpdateTaskStatusDto,
+  ) {
+    const { status } = updateTaskStatusDto;
+    return this.tasksService.updateTask(id, status);
   }
 }
