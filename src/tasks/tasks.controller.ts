@@ -19,28 +19,22 @@ export class TasksController {
 
   @Get()
   getTasks(@Query() filterDto: filterTasksDto) {
-    if (Object.keys(filterDto).length > 0) {
-      return this.tasksService.getAllTasksWithFilter(filterDto);
-    } else {
-      return this.tasksService.getAllTasks();
-    }
+    return this.tasksService.getAllTasks(filterDto);
   }
 
   @Get('/:id')
-  getTaskById(@Param('id') id: string) {
-    return this.tasksService.getTaskById(id);
+  async getTaskById(@Param('id') id: string) {
+    return await this.tasksService.getTaskById(id);
   }
 
   @Post('/')
   createTask(@Body() createTaskDto: CreateTaskDto) {
-    return this.tasksService.craeteTask(createTaskDto);
+    return this.tasksService.createTask(createTaskDto);
   }
 
   @Delete('/:id')
   deleteTask(@Param('id') id: string) {
-    this.tasksService.deleteTask(id);
-
-    return null;
+    return this.tasksService.deleteTask(id);
   }
 
   @Patch('/:id/status')
